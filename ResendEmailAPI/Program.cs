@@ -14,7 +14,7 @@ builder.Services.AddScoped<ResendAPI>();
 
 builder.Services.Configure<ResendClientOptions>(o =>
 {
-    o.ApiToken = Environment.GetEnvironmentVariable("ResendAPIKey")!;
+    o.ApiToken = Environment.GetEnvironmentVariable("ResendAPIKey"  )!;
 });
 builder.Services.AddTransient<IResend, ResendClient>();
 

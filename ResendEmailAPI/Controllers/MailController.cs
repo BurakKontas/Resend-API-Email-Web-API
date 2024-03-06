@@ -5,12 +5,22 @@ namespace ResendEmailAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MailController : ControllerBase
+    public class MailController(EmailSender emailSender, ResendAPI resendAPI) : ControllerBase
     {
-        [HttpGet]
-        public async Task<IActionResult> SendEmail(ResendAPI resendAPI)
+        private readonly EmailSender _emailSender = emailSender;
+        private readonly ResendAPI _resend = resendAPI;
+
+        [HttpGet("smtp")]
+        public async Task<IActionResult> SendEmail()
         {
-            await resendAPI.SendEmail();
+            await _emailSender.SendEmail("aburakkontas@trakya.edu.tr", "Hello!");
+            return Ok();
+        }
+
+        [HttpGet("resendapi")]
+        public async Task<IActionResult> SendEmailAPI()
+        {
+            await _resend.SendEmail();
             return Ok();
         }
     }

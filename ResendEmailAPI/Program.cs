@@ -11,10 +11,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient<ResendClient>();
 builder.Services.AddScoped<ResendAPI>();
-
+builder.Services.AddScoped<EmailSender>();
 builder.Services.Configure<ResendClientOptions>(o =>
 {
-    o.ApiToken = Environment.GetEnvironmentVariable("ResendAPIKey"  )!;
+    o.ApiToken = Environment.GetEnvironmentVariable("ResendAPIKey")!;
 });
 builder.Services.AddTransient<IResend, ResendClient>();
 
